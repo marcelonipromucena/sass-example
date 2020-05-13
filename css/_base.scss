@@ -1,0 +1,101 @@
+body {
+  font-family: arial;
+  text-align: center;
+}
+h1 {
+  background: red;
+  color: #fff;
+}
+
+/**
+Variable
+**/
+$color: green;
+
+.green {
+  background: $color;
+  padding: 10px;
+  color: #fff;
+}
+
+/**
+Mixin
+**/
+
+@mixin box-shadow($color) {
+  box-shadow: 3px 3px 4px 1px $color;
+}
+
+/**
+Mixin + if
+**/
+@mixin text-effect($val) {
+  @if $val == danger {
+    color: red;
+  } @else if $val == alert {
+    color: yellow;
+  } @else {
+    color: rgb(61, 41, 41);
+  }
+}
+
+.mixin-test {
+  @include box-shadow(rgba(0, 0, 0, 0.5));
+  @include text-effect(alert);
+
+  padding: 10px;
+  background: #000;
+}
+
+/**
+For + Each
+**/
+@for $i from 1 through 5 {
+  .text-#{$i} {
+    font-size: 15px * $i;
+  }
+}
+
+$colors: (blue, red, green);
+
+@each $color in $colors {
+  .#{$color}-text {
+    color: $color;
+  }
+}
+
+/**
+lighten() + darken()
+**/
+.lighten {
+  background: lighten(#000, 50);
+  color: #fff;
+  padding: 10px;
+}
+.darken { 
+  background: darken(#fff, 50);
+  color: #000;
+  padding: 10px;
+}
+
+/**
+Inheritance
+**/
+
+.flex {
+  background:green;
+  color:#FFF;
+}
+
+.extend-paragraph{
+  @extend .flex;
+  color:purple;
+}
+
+.referencing{
+  color:red;
+  &:hover{
+    color:purple;
+    background:yellow;
+  }
+}
